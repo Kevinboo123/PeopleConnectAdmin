@@ -1,13 +1,23 @@
 import React, { useState } from 'react';
 import { User, Lock } from 'react-feather';
+import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle login logic here
+    setError('');
+
+    if (login === 'admin' && password === '123') {
+      // Login successful
+      navigate('/dashboard');
+    } else {
+      setError('Invalid username or password');
+    }
   };
 
   return (
@@ -42,6 +52,8 @@ function LoginPage() {
               className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-600"
             />
           </div>
+          
+          {error && <p className="text-red-500 text-center">{error}</p>}
           
           <button
             type="submit"

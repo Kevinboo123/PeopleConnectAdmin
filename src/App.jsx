@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import Dashboard from './pages/Dashboard';
@@ -10,72 +10,38 @@ import PostManagement from './pages/PostManagement';
 import Sidebar from './components/Sidebar';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState(0);
+  const [showLanding, setShowLanding] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (currentPage < 2) {
-        setCurrentPage(currentPage + 1);
-      }
+      setShowLanding(false);
     }, 2000);
 
     return () => clearTimeout(timer);
-  }, [currentPage]);
+  }, []);
 
-  const renderSequentialPages = () => {
-    if (currentPage === 0) {
-      return <LandingPage />;
-    } else if (currentPage === 1) {
-      return <LoginPage />;
-    } else {
-      return (
-        <div className="flex h-screen">
-          <Sidebar />
-          <div className="flex-1 overflow-auto">
-            <Dashboard />
-          </div>
-        </div>
-      );
-    }
-  };
+  const PageWithSidebar = ({ children }) => (
+    <div className="flex h-screen">
+      <Sidebar />
+      <div className="flex-1 overflow-auto">
+        {children}
+      </div>
+    </div>
+  );
+
+  if (showLanding) {
+    return <LandingPage />;
+  }
 
   return (
     <Router>
       <Routes>
-        <Route path="/" element={renderSequentialPages()} />
-        <Route path="/categories" element={
-          <div className="flex h-screen">
-            <Sidebar />
-            <div className="flex-1 overflow-auto">
-              <Categories />
-            </div>
-          </div>
-        } />
-        <Route path="/services" element={
-          <div className="flex h-screen">
-            <Sidebar />
-            <div className="flex-1 overflow-auto">
-              <Services />
-            </div>
-          </div>
-        } />
-        <Route path="/posts" element={
-          <div className="flex h-screen">
-            <Sidebar />
-            <div className="flex-1 overflow-auto">
-              <PostManagement />
-            </div>
-          </div>
-        } />
-        {/* Add other routes as needed */}
-        <Route path="/users" element={
-          <div className="flex h-screen">
-            <Sidebar />
-            <div className="flex-1 overflow-auto">
-              <UsersManagement />
-            </div>
-          </div>
-        } />
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/dashboard" element={<PageWithSidebar><Dashboard /></PageWithSidebar>} />
+        <Route path="/categories" element={<PageWithSidebar><Categories /></PageWithSidebar>} />
+        <Route path="/services" element={<PageWithSidebar><Services /></PageWithSidebar>} />
+        <Route path="/posts" element={<PageWithSidebar><PostManagement /></PageWithSidebar>} />
+        <Route path="/users" element={<PageWithSidebar><UsersManagement /></PageWithSidebar>} />
       </Routes>
     </Router>
   );
