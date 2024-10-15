@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FiGrid, FiFileText, FiSettings, FiUser, FiHeart } from 'react-icons/fi';
+import dashboardlogo from '../assets/DashBoardLogo.png';
 
 function Sidebar() {
   const location = useLocation();
@@ -8,7 +9,7 @@ function Sidebar() {
   return (
     <div className="w-64 bg-violet-800 text-white p-6 h-screen flex flex-col">
       <div className="flex justify-center mb-8">
-        <img src="/src/assets/DashBoardLogo.png" alt="Project Logo" className="w-24 h-24" />
+        <img src={dashboardlogo} alt="Project Logo" className="w-24 h-24" />
       </div>
       <nav>
         <ul className="space-y-4">
