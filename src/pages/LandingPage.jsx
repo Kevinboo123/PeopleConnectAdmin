@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../assets/project_logo.png';
-import blobLeft from '../assets/blobLeft.svg';
-import blobRight from '../assets/blobRight.svg';
+import blobLeft from '../assets/blob1.png';
+import blobRight from '../assets/blob2.png';
 
 const LandingPage = () => {
   return (

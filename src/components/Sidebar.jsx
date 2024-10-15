@@ -8,7 +8,7 @@ function Sidebar() {
   return (
     <div className="w-64 bg-violet-800 text-white p-6 h-screen flex flex-col">
       <div className="flex justify-center mb-8">
-        <img src="/src/assets/image.png" alt="Project Logo" className="w-24 h-24" />
+        <img src="/src/assets/DashBogardLogo.png" alt="Project Logo" className="w-24 h-24" />
       </div>
       <nav>
         <ul className="space-y-4">
