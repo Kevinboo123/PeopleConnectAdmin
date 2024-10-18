@@ -14,7 +14,7 @@ function Sidebar() {
       <nav>
         <ul className="space-y-4">
           {[ 
-            { path: '/', icon: FiGrid, text: 'Dashboard' },
+            { path: '/dashboard', icon: FiGrid, text: 'Dashboard' },
             { path: '/categories', icon: FiFileText, text: 'Categories Management' },
             { path: '/services', icon: FiSettings, text: 'Service Management' },
             { path: '/users', icon: FiUser, text: 'User Management' },
